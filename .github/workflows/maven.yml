@@ -46,3 +46,9 @@ jobs:
     - name: Build with Maven
       # Use the default goal
       run: mvn -V --file pom.xml --no-transfer-progress
+    - name: Build Test Module
+      run: mvn test-compile -pl . -am
+    - name: Run Test
+      run: mvn -pl . test -Dtest=org.apache.commons.collections4.bidimap.DualHashBidiMapTest#testBidiKeySetValuesOrder
+    - name: Run NonDex Test
+      run: mvn -pl . edu.illinois:nondex-maven-plugin:1.1.2:nondex -DnondexRuns=100 -Dtest=org.apache.commons.collections4.bidimap.DualHashBidiMapTest#testBidiKeySetValuesOrder
